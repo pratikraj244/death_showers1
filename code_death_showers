@@ -1,0 +1,350 @@
+import pygame
+import time
+from sys import exit
+from pygame import K_SPACE
+pygame.init()
+scr = pygame.display.set_mode((800,800))
+scr.fill((0,0,0))
+a = pygame.time.Clock()
+class back(pygame.sprite.Sprite):
+    def __init__(self,posx,posy,pic):
+        super().__init__()
+        self.image = pygame.image.load(pic)
+        self.rect = self.image.get_rect()
+        self.rect.center = [posx,posy]
+class button(pygame.sprite.Sprite):
+    def __init__(self,posx1,posy1,pic1):
+        super().__init__()
+        self.image = pygame.image.load(pic1)
+        self.rect = self.image.get_rect()
+        self.rect.center = [posx1,posy1]
+    def click(self):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                menupage()
+    def update(self):
+        self.click()
+class button1(pygame.sprite.Sprite):
+    def __init__(self,posx3,posy3,pic3):
+        super().__init__()
+        self.image = pygame.image.load(pic3)
+        self.rect = self.image.get_rect()
+        self.rect.center = [posx3,posy3]
+    def click(self):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.rect.collidepoint(event.pos):
+                play()
+    def update(self):
+        self.click()
+obj = back(400,390,"C:/Users/Dell/OneDrive/Desktop/icons/menu5.jpg")
+obj_grp = pygame.sprite.Group()
+obj_grp.add(obj)
+btn = button1(150,260,"C:/Users/Dell/OneDrive/Desktop/icons/shbuttons.jpg")
+btn_grp = pygame.sprite.Group()
+btn_grp.add(btn)
+btn1 = button(150,360,"C:/Users/Dell/OneDrive/Desktop/icons/shbutton2.jpg")
+btn1_grp = pygame.sprite.Group()
+btn1_grp.add(btn1)
+def menupage():
+    scr1 = pygame.display.set_mode((800,800))
+    class back1(pygame.sprite.Sprite):
+        def __init__(self,posx2,posy2,pic2):
+            super().__init__()
+            self.image = pygame.image.load(pic2)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx2,posy2]
+    class button2(pygame.sprite.Sprite):
+        def __init__(self,posx4,posy4,pic4):
+            super().__init__()
+            self.image = pygame.image.load(pic4)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx4,posy4]
+        def click2(self):
+            for event in pygame.event.get():
+               if event.type == pygame.MOUSEBUTTONDOWN:
+                   if self.rect.collidepoint(event.pos):
+                       start()
+       def update(self):
+            self.click2()
+    obj1 = back1(400, 390, "C:/Users/Dell/OneDrive/Desktop/icons/menu4.jpg")
+    obj1_grp = pygame.sprite.Group()
+    obj1_grp.add(obj1)
+    obj2 = button2(400, 590, "C:/Users/Dell/OneDrive/Desktop/icons/menubutton.jpg")
+    obj2_grp = pygame.sprite.Group()
+    obj2_grp.add(obj2)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        scr1.fill((0,0,0))
+        obj1_grp.draw(scr1)
+        obj2_grp.draw(scr1)
+        obj2_grp.update()
+        pygame.display.update()
+def play():
+    scr2 = pygame.display.set_mode((800,800))
+    text = pygame.font.SysFont("comic sans",48)
+    text1 = pygame.font.SysFont("comic sans bold",25)
+    text2 = pygame.font.SysFont("comic sans bold", 25)
+    text3 = pygame.font.SysFont("comic sans bold", 25)
+    score1 = pygame.font.SysFont("comic sans", 16)
+    s = 1
+    s1 = 1
+    s2 = 1
+    s3 = 1
+    s4 = 1
+    t1 = "score:"
+    class screen(pygame.sprite.Sprite):
+        def __init__(self,posx5,posy5,pic5):
+            super().__init__()
+            self.image = pygame.image.load(pic5)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx5,posy5]
+    class obstacle(pygame.sprite.Sprite):
+        def __init__(self,posx6,posy6,pic6):
+            super().__init__()
+            self.image = pygame.image.load(pic6)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx6,posy6]
+        def move(self):
+            self.rect.right += 1.2
+            if self.rect.right == 460:
+                self.rect.right = 0
+        def update(self):
+            self.move()
+    class obstacle2(pygame.sprite.Sprite):
+        def __init__(self,posx7,posy7,pic7):
+            super().__init__()
+            self.image = pygame.image.load(pic7)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx7,posy7]
+        def move1(self):
+            self.rect.bottom += 2.45
+            if self.rect.bottom > 740:
+                self.rect.bottom = 80
+        def update(self):
+            self.move1()
+    class border(pygame.sprite.Sprite):
+        def __init__(self,posx9,posy9,pic9):
+            super().__init__()
+            self.image = pygame.image.load(pic9)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx9,posy9]
+    class scoreboard(pygame.sprite.Sprite):
+        def __init__(self,posx10,posy10,pic10):
+            super().__init__()
+            self.image = pygame.image.load(pic10)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx10,posy10]
+    class player(pygame.sprite.Sprite):
+        def __init__(self,posx8,posy8,pic8):
+            super().__init__()
+            self.image = pygame.image.load(pic8)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx8, posy8]
+        def keypad(self):
+            key = pygame.key.get_pressed()
+            if key[pygame.K_RIGHT]:
+                    if self.rect.right <= 799:
+                        self.rect.right += 2.45
+            if key[pygame.K_LEFT]:
+                    if self.rect.left >= 1:
+                        self.rect.left -= 2.45
+        def collisions(self):
+           if self.rect.colliderect(obj10) or self.rect.colliderect(obj13) or self.rect.colliderect(obj19) or self.rect.colliderect(obj20):
+               self.rect.center = [1000,1000]
+               obj12.rect.center = [1500,1500]
+               obj13.rect.center = [1600,1600]
+               obj10.rect.center = [1700,1700]
+               obj19.rect.center = [1800,1800]
+               obj11.rect.center = [1500, 1500]
+               obj18.rect.center = [1600, 1600]
+               obj15.rect.center = [1700, 1700]
+               obj16.rect.center = [1800, 1800]
+               obj8.rect.center = [1700, 1700]
+               obj17.rect.center = [1700, 1700]
+               obj9.rect.center = [1800, 1800]
+               obj20.rect.center = [1800, 1800]
+               obj21.rect.center = [390, 370]
+        def update(self):
+            self.keypad()
+            self.collisions()
+    obj6 = screen(400,390,"C:/Users/Dell/OneDrive/Desktop/icons/background2.jpg")
+    obj6_grp = pygame.sprite.Group()
+    obj6_grp.add(obj6)
+    obj8 = obstacle(200,760,"C:/Users/Dell/OneDrive/Desktop/icons/treasurebox.jpg")
+    obj8_grp = pygame.sprite.Group()
+    obj8_grp.add(obj8)
+    obj9 = obstacle(0, 760, "C:/Users/Dell/OneDrive/Desktop/icons/treasurebox.jpg")
+    obj9_grp = pygame.sprite.Group()
+    obj9_grp.add(obj9)
+    obj15 = obstacle(100,760,"C:/Users/Dell/OneDrive/Desktop/icons/coin1.jpg")
+    obj15_grp = pygame.sprite.Group()
+    obj15_grp.add(obj15)
+    obj16 = obstacle(150, 760, "C:/Users/Dell/OneDrive/Desktop/icons/coin1.jpg")
+    obj16_grp = pygame.sprite.Group()
+    obj16_grp.add(obj16)
+    obj17 = obstacle(280, 760, "C:/Users/Dell/OneDrive/Desktop/icons/suitcase2.jpg")
+    obj17_grp = pygame.sprite.Group()
+    obj17_grp.add(obj17)
+    obj18 = obstacle(-80, 760, "C:/Users/Dell/OneDrive/Desktop/icons/bluewhite.jpg")
+    obj18_grp = pygame.sprite.Group()
+    obj18_grp.add(obj18)
+    obj10 = obstacle2(290,0, "C:/Users/Dell/OneDrive/Desktop/icons/brick4.jpg")
+    obj10_grp = pygame.sprite.Group()
+    obj10_grp.add(obj10)
+    obj13 = obstacle2(540, -100, "C:/Users/Dell/OneDrive/Desktop/icons/brick4.jpg")
+    obj13_grp = pygame.sprite.Group()
+    obj13_grp.add(obj13)
+    obj20 = obstacle2(410, -230, "C:/Users/Dell/OneDrive/Desktop/icons/brick.jpg")
+    obj20_grp = pygame.sprite.Group()
+    obj20_grp.add(obj20)
+    obj19 = obstacle2(120,-150, "C:/Users/Dell/OneDrive/Desktop/icons/brick6.jpg")
+    obj19_grp = pygame.sprite.Group()
+    obj19_grp.add(obj19)
+    obj12 = border(400, 735, "C:/Users/Dell/OneDrive/Desktop/icons/border_coin.jpg")
+    obj12_grp = pygame.sprite.Group()
+    obj12_grp.add(obj12)
+    obj11 = player(200,750,"C:/Users/Dell/OneDrive/Desktop/icons/face.jpg")
+    obj11_grp = pygame.sprite.Group()
+    obj11_grp.add(obj11)
+    obj14 = scoreboard(680,187,"C:/Users/Dell/OneDrive/Desktop/icons/scoreboard2.jpg")
+    obj14_grp = pygame.sprite.Group()
+    obj14_grp.add(obj14)
+    obj21 = border(1680, 1187, "C:/Users/Dell/OneDrive/Desktop/icons/restart3.jpg")
+    obj21_grp = pygame.sprite.Group()
+    obj21_grp.add(obj21)
+        while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        if pygame.Rect.colliderect(obj10.rect,obj12.rect) or pygame.Rect.colliderect(obj13.rect,obj12.rect) or pygame.Rect.colliderect(obj19.rect,obj12.rect) :
+            s += 1.54
+        if pygame.Rect.colliderect(obj8.rect,obj11.rect) or pygame.Rect.colliderect(obj9.rect,obj11.rect):
+            s1 += 0.15
+        if pygame.Rect.colliderect(obj15.rect,obj11.rect) or pygame.Rect.colliderect(obj16.rect,obj11.rect):
+            s2 += 0.15
+        if pygame.Rect.colliderect(obj17.rect,obj11.rect):
+            s3 += 0.15
+        if pygame.Rect.colliderect(obj18.rect,obj11.rect):
+            s4 += 0.15
+        key1 = pygame.key.get_pressed()
+        if key1[K_SPACE]:
+            play()
+        b = text.render(str(round(0.1*s)),True,"White")
+        b1 = text1.render(str(round(0.1*s1)),True,"White")
+        b2 = text2.render(str(round(0.1*s2)),True,"White")
+        b3 = text3.render(str(round(0.1*s3)),True,"White")
+        b4 = text3.render(str(round(0.1*s4)),True,"White")
+        c1 = score1.render(str(t1),True,"White")
+        scr2.fill((0,0,255))
+        obj6_grp.draw(scr2)
+        obj8_grp.draw(scr2)
+        obj8_grp.update()
+        obj9_grp.draw(scr2)
+        obj9_grp.update()
+        obj10_grp.draw(scr2)
+        obj10_grp.update()
+        obj15_grp.draw(scr2)
+        obj15_grp.update()
+        obj16_grp.draw(scr2)
+        obj16_grp.update()
+        obj17_grp.draw(scr2)
+        obj17_grp.update()
+        obj18_grp.draw(scr2)
+        obj18_grp.update()
+        obj19_grp.draw(scr2)
+        obj19_grp.update()
+        obj20_grp.draw(scr2)
+        obj20_grp.update()
+        obj21_grp.draw(scr2)
+        obj13_grp.draw(scr2)
+        obj13_grp.update()
+        obj14_grp.draw(scr2)
+        obj12_grp.draw(scr2)
+        obj11_grp.draw(scr2)
+        obj11_grp.update()
+        scr2.blit(b, (380, 40))
+        scr2.blit(b1, (740, 58))
+        scr2.blit(b2, (740,128))
+        scr2.blit(b3, (740,196))
+        scr2.blit(b4, (740, 263))
+        scr2.blit(c1, (690,55))
+        scr2.blit(c1, (690, 125))
+        scr2.blit(c1, (690, 193))
+        scr2.blit(c1, (690, 260))
+
+        pygame.display.flip()
+        pygame.display.update()
+def start():
+    class back(pygame.sprite.Sprite):
+        def __init__(self, posx, posy, pic):
+            super().__init__()
+            self.image = pygame.image.load(pic)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx, posy]
+
+    class button(pygame.sprite.Sprite):
+        def __init__(self, posx1, posy1, pic1):
+            super().__init__()
+            self.image = pygame.image.load(pic1)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx1, posy1]
+
+        def click3(self):
+            for event in e:
+               if event.type == pygame.MOUSEBUTTONDOWN:
+                   if self.rect.collidepoint(event.pos):
+                      menupage()
+
+        def update(self):
+            self.click3()
+
+    class button1(pygame.sprite.Sprite):
+       def __init__(self, posx3, posy3, pic3):
+            super().__init__()
+            self.image = pygame.image.load(pic3)
+            self.rect = self.image.get_rect()
+            self.rect.center = [posx3, posy3]
+       def click(self):
+            for event in e:
+               if event.type == pygame.MOUSEBUTTONDOWN:
+                   if self.rect.collidepoint(event.pos):
+                      play()
+       def update(self):
+            self.click()
+    obj = back(400, 390, "C:/Users/Dell/OneDrive/Desktop/icons/menu3.jpg")
+    obj_grp = pygame.sprite.Group()
+    obj_grp.add(obj)
+    btn = button1(150, 260, "C:/Users/Dell/OneDrive/Desktop/icons/shbuttons.jpg")
+    btn_grp = pygame.sprite.Group()
+    btn_grp.add(btn)
+    btn1 = button(150, 360, "C:/Users/Dell/OneDrive/Desktop/icons/shbutton2.jpg")
+    btn1_grp = pygame.sprite.Group()
+    btn1_grp.add(btn1)
+    while True:
+        e = pygame.event.get()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        obj_grp.draw(scr)
+        btn_grp.draw(scr)
+        btn_grp.update()
+        btn1_grp.draw(scr)
+        btn1_grp.update()
+        pygame.display.update()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+    obj_grp.draw(scr)
+    btn_grp.draw(scr)
+    btn_grp.update()
+    btn1_grp.draw(scr)
+    btn1_grp.update()
+    pygame.display.update()
+
